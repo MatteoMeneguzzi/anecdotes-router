@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 import About from './components/About';
+import AnecdoteDetail from './components/AnecdoteDetail';
 import AnecdoteList from './components/AnecdoteList';
 import CreateNew from './components/CreateNew';
 import Footer from './components/Footer';
@@ -50,9 +51,15 @@ const App = () => {
       <div>
         <h1>Software anecdotes</h1>
         <Menu />
-        <AnecdoteList anecdotes={anecdotes} />
-        <About />
-        <CreateNew addNew={addNew} />
+        <Routes>
+          <Route
+            path='/anecdotes/:id'
+            element={<AnecdoteDetail anecdotes={anecdotes} />}
+          />
+          <Route path='/' element={<AnecdoteList anecdotes={anecdotes} />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/create' element={<CreateNew addNew={addNew} />} />
+        </Routes>
         <Footer />
       </div>
     </Router>
